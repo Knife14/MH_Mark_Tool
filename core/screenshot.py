@@ -30,6 +30,6 @@ def window_screenshot(window_title):
 
 
 if __name__ == '__main__':
-    target_window_title = "Chrome"
+    target_window_title = "梦幻西游"
     
     window_screenshot(target_window_title)
