@@ -8,8 +8,10 @@
 # v0.1      2024/01/02    basic build success
 # -----------------------------
 
-import pytesseract
+from paddleocr import PaddleOCR, draw_ocr
 from PIL import Image
+
+import datetime
 
 
 class Classify():
@@ -17,16 +19,23 @@ class Classify():
         self.on_init()
     
     def on_init(self):
-        pytesseract.pytesseract.tesseract_cmd = r"./tools/ocr/tesseract.exe"
+        self.ocr = PaddleOCR(lang="ch", use_gpu="false", use_angle_cls="false")
     
     def ima_to_str(self, ima):
-        result = pytesseract.image_to_string(ima, lang='chi_sim')
-
-        print(result)
+        
+        print('start:', datetime.datetime.now())
+        result = self.ocr.ocr(ima, cls=True)
+        for idx in range(len(result)):
+            res = result[idx]
+            for line in res:
+                print(line)
+        print('end:', datetime.datetime.now())
         
 
 if __name__ == "__main__":
-    image = Image.open('./temp/梦幻西游_screenshot1.png')
+    imas = ['./temp/梦幻西游_screenshot5.png',
+           './temp/梦幻西游_screenshot6.png']
     
     ins = Classify()
-    ins.ima_to_str(image)
+    for ima in imas:
+        ins.ima_to_str(ima)
