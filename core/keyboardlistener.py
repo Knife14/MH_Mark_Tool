@@ -31,6 +31,7 @@ class KeyboardListener():
         keyboard.unhook_all()
     
     def cognition_alte(self):
+        # ATTENTION: to run when mhxy is the active process.
         print('alt + e')
         
         
