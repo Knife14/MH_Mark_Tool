@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*- #
 
 # -----------------------------
-# Topic: reptile equipments images from official website
+# Topic: reptile weapons images from official website
 # Created: 2024.01.05
 # History:
 # <version>    <time>        <desc>
@@ -36,8 +36,12 @@ def data_process(url: str, html: str, output: str):
         eqs = html_soup.find_all('tbody')[1].find_all('tr')[1: 8]
     elif statistic[0] % 1000 == 12:
         eqs = html_soup.find_all('tbody')[2].find_all('tr')[1: 8]
-    else:
+    elif statistic[0] % 1000 < 19:
         eqs = html_soup.find_all('tbody')[1].find_all('tr')[2: 9]
+    elif statistic[0] % 1000 < 22:
+        eqs = html_soup.find_all('tbody')[1].find_all('tr')[1: 8]
+    else:
+        eqs = html_soup.find_all('tbody')[1].find_all('tr')[1: 13]
     # save images and insert info into json1
     for eq in eqs:
         infos = eq.find_all('td')
@@ -59,7 +63,7 @@ def data_process(url: str, html: str, output: str):
         with open(os.path.join(output, eq_json['ID'] + '.png'), 'wb') as ifile:
             ifile.write(ima)
         items_json.write(json.dumps(eq_json, ensure_ascii=False) + '\n')
-    
+
 
 if __name__ == "__main__":
     urls = ['https://xyq.163.com/introduce/dj004.html',
@@ -80,7 +84,12 @@ if __name__ == "__main__":
             'https://xyq.163.com/dj004_16.html',
             'https://xyq.163.com/dj004_17.html',
             'https://xyq.163.com/dj004_18.html',
-            'https://xyq.163.com/dj004_19.html',]
+            'https://xyq.163.com/dj004_19.html',
+            'https://xyq.163.com/introduce/dj005.html',
+            'https://xyq.163.com/dj005_2.html',
+            'https://xyq.163.com/dj005_3.html',
+            'https://xyq.163.com/dj005_4.html',
+            'https://xyq.163.com/dj005_5.html',]
     
     output = "./resources/items"
     statistic = [0] * 7
