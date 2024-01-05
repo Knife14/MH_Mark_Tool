@@ -24,7 +24,7 @@ class ImageProcessing():
         result = self.ocr.ocr(ima, cls=True)
     
     def find_package(self, tem: str, tar: str):
-        template = cv2.imread(tem, cv2.IMREAD_GRAYSCALE)
+        template = cv2.imread(tem, cv2.IMREAD_GRAYSCALE) # v - 395 * 565; h - 672 * 412
         target = cv2.imread(tar, cv2.IMREAD_GRAYSCALE)
 
         # compare with template image
@@ -44,8 +44,8 @@ class ImageProcessing():
 if __name__ == "__main__":
     ins = ImageProcessing()
     
-    # imas = ['./temp/梦幻西游_screenshot5.png',
-    #        './temp/梦幻西游_screenshot6.png']
+    # imas = ['./temp/mhxy_screenshot5.png',
+    #        './temp/mhxy_screenshot6.png']
     # for ima in imas:
     #     ins.ima_to_str(ima)
     
